@@ -1,0 +1,21 @@
+hotspot_id,name,ward,latitude,longitude,elevation_m,catchment,risk_tier,historical_recurrence_rate,typical_flood_depth_cm,installed_pump_capacity_hp,near_railway_subway,copernicus_dem_m
+HS_01,Hindmata Cinema / Dadar TT,F/South,19.0178,72.8478,7.2,Mithi / Mahim Basin,Critical,0.95,75,800,False,10.0
+HS_02,Gandhi Market / King's Circle,F/North,19.0345,72.8592,6.8,Mata Ramabai Ambedkar Nullah,Critical,0.92,85,650,False,15.0
+HS_03,"Milan Subway, Santacruz",H/West,19.0832,72.8425,5.4,Milan Underpass Drainage Sump,Critical,0.98,120,1200,True,16.0
+HS_04,Andheri Subway,K/West,19.1197,72.8464,5.1,Mogra Nullah Basin,Critical,0.96,140,1000,True,16.0
+HS_05,Khar Subway,H/West,19.0715,72.8398,6.1,Gazdarbandh Pumping Basin,High,0.88,90,600,True,16.0
+HS_06,Malad Subway,P/North,19.1865,72.8485,5.8,Poisar River Tributary,Critical,0.94,110,750,True,19.0
+HS_07,Kurla Station West / LBS Marg,L,19.0688,72.8805,4.9,Mithi River Low-lying Floodplain,Critical,0.93,100,900,False,9.0
+HS_08,Sion Road No. 24 / Sion Circle,F/North,19.0412,72.8628,7.0,Sion Koliwada Lowland,High,0.85,60,450,False,15.0
+HS_09,Chunabhatti / Postal Colony,L,19.0531,72.8752,5.6,Mahul Creek Drain,High,0.86,70,500,False,9.0
+HS_10,Sakinaka Junction / 90ft Road,L,19.0984,72.8879,8.5,Mithi River Upper Catchment,Medium,0.72,50,350,False,14.0
+HS_11,Chembur Shell Colony,M/West,19.0601,72.8942,6.3,Chembur East Nullah,High,0.81,65,400,False,10.0
+HS_12,Govandi Shivaji Nagar,M/East,19.0568,72.9234,5.0,Thane Creek Tidal Backwater,Critical,0.89,80,500,False,8.0
+HS_13,Bandra Government Colony (BKC Edge),H/East,19.0612,72.8521,6.5,Vakola Nullah confluence,Medium,0.7,45,300,False,11.0
+HS_14,Byculla Railway Police Line,E,18.9754,72.8341,8.1,Lovegrove Outfall,Medium,0.68,40,250,False,8.0
+HS_15,Grant Road / Nana Chowk,D,18.9625,72.8153,9.4,Haji Ali Outfall,Medium,0.65,35,200,False,10.0
+HS_16,Dahisar Subway,R/North,19.2571,72.8596,5.9,Dahisar River Culvert,Critical,0.91,115,700,True,9.0
+HS_17,Kandivali Poisar River Culvert,R/South,19.2084,72.8512,6.8,Poisar River Basin,High,0.84,70,450,False,13.0
+HS_18,Worli Naka / Dr Annie Besant Rd,G/South,19.0118,72.8182,8.8,Cleave Land Bunder Pumping Basin,Medium,0.62,40,300,False,17.0
+HS_19,Bhandup LBS Marg / Sonapur,S,19.1458,72.9354,9.2,Bhandup Nullah to Thane Creek,High,0.79,55,400,False,18.0
+HS_20,Mulund Goregaon Link Road Jn,T,19.1685,72.9461,10.5,Mulund Creek Basin,Medium,0.6,35,250,False,15.0

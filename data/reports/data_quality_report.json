@@ -1,0 +1,11 @@
+{
+  "audit_timestamp": "2026-10-20T13:12:13.251438",
+  "hotspots_count": 20,
+  "rainfall_records": 5479,
+  "incidents_count": 1468,
+  "null_values_hotspots": 0,
+  "null_values_rainfall": 0,
+  "null_values_incidents": 0,
+  "geographic_bounding_box": "18.85\u00b0N-19.35\u00b0N, 72.75\u00b0E-73.10\u00b0E (Mumbai MMR)",
+  "validation_verdict": "PASSED ALL HYGIENE CRITERIA"
+}

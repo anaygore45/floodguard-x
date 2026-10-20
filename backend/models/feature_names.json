@@ -1,0 +1,10 @@
+[
+  "rainfall_24h_mm",
+  "rain_3d_accum_mm",
+  "rain_7d_accum_mm",
+  "elevation_m",
+  "depression_depth_m",
+  "historical_recurrence_rate",
+  "installed_pump_capacity_hp",
+  "near_railway_subway"
+]

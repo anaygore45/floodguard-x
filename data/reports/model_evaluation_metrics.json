@@ -1,0 +1,18 @@
+{
+  "model_type": "RandomForestClassifier",
+  "train_period": "2010-2021",
+  "test_period": "2022-2024",
+  "test_f1_score": 0.912,
+  "test_roc_auc": 0.971,
+  "features_used": [
+    "rainfall_24h_mm",
+    "rain_3d_accum_mm",
+    "rain_7d_accum_mm",
+    "elevation_m",
+    "depression_depth_m",
+    "historical_recurrence_rate",
+    "installed_pump_capacity_hp",
+    "near_railway_subway"
+  ],
+  "serialized_date": "2026-10-20T13:12:14.101266"
+}
