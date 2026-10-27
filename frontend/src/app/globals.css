@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'maplibre-gl/dist/maplibre-gl.css';
-
 :root {
   --background: #F5F5F2;
   --surface: #FFFFFF;

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import "maplibre-gl/dist/maplibre-gl.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FloodGuard X — Urban Flood Intelligence & Intervention Planning",
-  description: "Enterprise geospatial analytics, calibrated machine learning, and OLAP data warehouse for Mumbai Metropolitan Region",
+  title: "FloodGuard-X: Counterfactual City",
+  description: "Predict the Risk. Test the Solution. Prevent the Impact. Urban Flood Intelligence & Counterfactual Intervention Planning System for Mumbai.",
 };
 
 export default function RootLayout({
