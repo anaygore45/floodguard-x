@@ -19,11 +19,14 @@ interface Hotspot {
 }
 
 interface Facility {
-  id: string;
+  id?: string;
+  facility_id?: string;
   name: string;
   category: string;
-  lat: number;
-  lon: number;
+  lat?: number;
+  lon?: number;
+  latitude?: number;
+  longitude?: number;
   threat_level: string;
 }
 
@@ -148,6 +151,10 @@ export default function MapView({
     // Add hotspot markers
     if (showHotspots) {
       filteredHotspots.forEach((h) => {
+        const hLon = Number((h as any).longitude ?? (h as any).lon);
+        const hLat = Number((h as any).latitude ?? (h as any).lat);
+        if (isNaN(hLon) || isNaN(hLat)) return;
+
         const el = document.createElement("div");
         el.className = "cursor-pointer group flex flex-col items-center";
 
@@ -188,7 +195,7 @@ export default function MapView({
         `);
 
         const marker = new maplibregl.Marker({ element: el })
-          .setLngLat([h.longitude, h.latitude])
+          .setLngLat([hLon, hLat])
           .setPopup(popup)
           .addTo(map);
 
@@ -199,6 +206,10 @@ export default function MapView({
     // Add facility markers
     if (showFacilities) {
       facilities.forEach((f) => {
+        const fLon = Number((f as any).lon ?? (f as any).longitude);
+        const fLat = Number((f as any).lat ?? (f as any).latitude);
+        if (isNaN(fLon) || isNaN(fLat)) return;
+
         const el = document.createElement("div");
         el.className = "cursor-pointer";
         el.innerHTML = `
@@ -221,7 +232,7 @@ export default function MapView({
         `);
 
         const marker = new maplibregl.Marker({ element: el })
-          .setLngLat([f.lon, f.lat])
+          .setLngLat([fLon, fLat])
           .setPopup(popup)
           .addTo(map);
 

@@ -112,46 +112,55 @@ export default function RippleImpactView({
 
     const target = impactData.target_hotspot;
     if (target) {
-      // Fly to target
-      map.flyTo({ center: [target.longitude, target.latitude], zoom: 13 });
+      const tLon = Number(target.longitude ?? target.lon);
+      const tLat = Number(target.latitude ?? target.lat);
 
-      // Add Target Hotspot marker
-      const el = document.createElement("div");
-      el.innerHTML = `
-        <div style="
-          width: 26px;
-          height: 26px;
-          background-color: #A64E45;
-          border: 3px solid #FFFFFF;
-          border-radius: 50%;
-          box-shadow: 0 0 12px rgba(166, 78, 69, 0.6);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: white;
-          font-size: 11px;
-          font-weight: bold;
-        ">!</div>
-      `;
-      const m = new maplibregl.Marker({ element: el })
-        .setLngLat([target.longitude, target.latitude])
-        .setPopup(
-          new maplibregl.Popup({ offset: 12 }).setHTML(`
-          <div style="font-size: 12px; font-weight: 600; color: #242722;">
-            ${target.name}
-            <div style="font-weight: 400; color: #A64E45;">Active Epicenter</div>
-          </div>
-        `)
-        )
-        .addTo(map);
-      markersRef.current.push(m);
+      if (!isNaN(tLon) && !isNaN(tLat)) {
+        // Fly to target
+        map.flyTo({ center: [tLon, tLat], zoom: 13 });
+
+        // Add Target Hotspot marker
+        const el = document.createElement("div");
+        el.innerHTML = `
+          <div style="
+            width: 26px;
+            height: 26px;
+            background-color: #A64E45;
+            border: 3px solid #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(166, 78, 69, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+          ">!</div>
+        `;
+        const m = new maplibregl.Marker({ element: el })
+          .setLngLat([tLon, tLat])
+          .setPopup(
+            new maplibregl.Popup({ offset: 12 }).setHTML(`
+            <div style="font-size: 12px; font-weight: 600; color: #242722;">
+              ${target.name}
+              <div style="font-weight: 400; color: #A64E45;">Active Epicenter</div>
+            </div>
+          `)
+          )
+          .addTo(map);
+        markersRef.current.push(m);
+      }
     }
 
     // Add Facility Markers
     if (impactData.critical_facilities) {
       impactData.critical_facilities.forEach((fac: any) => {
+        const facLon = Number(fac.longitude ?? fac.lon);
+        const facLat = Number(fac.latitude ?? fac.lat);
+        if (isNaN(facLon) || isNaN(facLat)) return;
+
         const fEl = document.createElement("div");
-        const isThreat = fac.threat_level.includes("Critical") || fac.threat_level.includes("High");
+        const isThreat = fac.threat_level?.includes("Critical") || fac.threat_level?.includes("High");
         const color = isThreat ? "#A64E45" : "#40584B";
 
         fEl.innerHTML = `
@@ -176,7 +185,7 @@ export default function RippleImpactView({
         `);
 
         const facMarker = new maplibregl.Marker({ element: fEl })
-          .setLngLat([fac.longitude, fac.latitude])
+          .setLngLat([facLon, facLat])
           .setPopup(popup)
           .addTo(map);
 

@@ -606,9 +606,12 @@ class CounterfactualEngine:
                 ingress_prob = 0.98
 
             evaluated_facilities.append({
+                "id": fac["id"],
                 "facility_id": fac["id"],
                 "name": fac["name"],
                 "category": fac["category"],
+                "lat": fac["lat"],
+                "lon": fac["lon"],
                 "latitude": fac["lat"],
                 "longitude": fac["lon"],
                 "bed_capacity": fac["bed_capacity"],
