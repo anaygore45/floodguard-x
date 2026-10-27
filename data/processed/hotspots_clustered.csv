@@ -1,5 +1,5 @@
 hotspot_id,name,ward,latitude,longitude,elevation_m,catchment,risk_tier,historical_recurrence_rate,typical_flood_depth_cm,installed_pump_capacity_hp,near_railway_subway,cluster_id
-HS_01,Hindmata Cinema / Dadar TT,F/South,19.0178,72.8478,7.2,Mithi / Mahim Basin,Critical,0.95,75,800,False,0
+HS_01,"Sangam Nagar, Wadala East",F/South,19.0178,72.8478,7.2,Mithi / Mahim Basin,Critical,0.95,75,800,False,0
 HS_02,Gandhi Market / King's Circle,F/North,19.0345,72.8592,6.8,Mata Ramabai Ambedkar Nullah,Critical,0.92,85,650,False,0
 HS_03,"Milan Subway, Santacruz",H/West,19.0832,72.8425,5.4,Milan Underpass Drainage Sump,Critical,0.98,120,1200,True,0
 HS_04,Andheri Subway,K/West,19.1197,72.8464,5.1,Mogra Nullah Basin,Critical,0.96,140,1000,True,-1

@@ -204,7 +204,7 @@ def init_extended_warehouse():
     cur.execute("SELECT COUNT(*) FROM fact_outcome_observation")
     if cur.fetchone()[0] == 0:
         benchmark_observations = [
-            ("OBS_2024_01", "2024-07-08", "HS_01", "Hindmata Cinema / Dadar TT", 1, 145.0, 68.0, "Critical", "INT_01,INT_03", 0.94, "Critical", 3.2, 0.03, "High tide 4.62m caused outfall lock; pumps ran continuously for 6 hours."),
+            ("OBS_2024_01", "2024-07-08", "HS_01", "Sangam Nagar, Wadala East", 1, 145.0, 68.0, "Critical", "INT_01,INT_03", 0.94, "Critical", 3.2, 0.03, "High tide 4.62m caused outfall lock; pumps ran continuously for 6 hours."),
             ("OBS_2024_02", "2024-07-21", "HS_02", "Gandhi Market / King's Circle", 2, 118.0, 48.0, "High", "INT_01", 0.88, "Critical", -2.4, 0.05, "Water receded 40 minutes faster following culvert desilting."),
             ("OBS_2024_03", "2024-08-04", "HS_03", "Milan Subway, Santacruz", 3, 162.0, 85.0, "Critical", "INT_06", 0.96, "Critical", 5.0, 0.02, "Automated boom barrier deployed within 10 min; zero stranded motor vehicles."),
             ("OBS_2024_04", "2024-08-18", "HS_04", "Andheri Subway", 4, 130.0, 72.0, "Critical", "INT_02,INT_06", 0.92, "Critical", 1.8, 0.04, "Barriers held until 70cm; minor overtopping occurred during peak hour cloudburst."),

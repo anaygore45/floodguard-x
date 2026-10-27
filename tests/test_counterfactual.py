@@ -50,7 +50,7 @@ def test_evaluate_counterfactual():
 
 def test_save_and_list_scenarios():
     payload = {
-        "scenario_name": "Pytest Monitored Hindmata Scenario",
+        "scenario_name": "Pytest Monitored Sangam Nagar Wadala Scenario",
         "description": "Validation test scenario for automated counterfactual lab",
         "hotspot_id": "HS_01",
         "rainfall_intensity_mm_h": 35.0,

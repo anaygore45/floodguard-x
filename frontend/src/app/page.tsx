@@ -683,7 +683,7 @@ export default function FloodGuardDashboard() {
                         <td className="py-2.5 px-3">Mithi / Lovegrove / Mahim</td>
                         <td className="py-2.5 px-3">7.2 m MSL</td>
                         <td className="py-2.5 px-3 font-semibold">5 Spots</td>
-                        <td className="py-2.5 px-3 text-[#A64E45] font-medium">Critical Depression (Hindmata / Gandhi Mkt)</td>
+                        <td className="py-2.5 px-3 text-[#A64E45] font-medium">Critical Depression (Sangam Nagar, Wadala East / Gandhi Mkt)</td>
                       </tr>
                       <tr>
                         <td className="py-2.5 px-3 font-mono font-medium">Cluster 1</td>

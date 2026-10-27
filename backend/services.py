@@ -547,7 +547,7 @@ class CounterfactualEngine:
         if not hotspot:
             hotspot = {
                 "hotspot_id": hotspot_id,
-                "name": "Hindmata Cinema / Dadar TT",
+                "name": "Sangam Nagar, Wadala East",
                 "ward": "F/South",
                 "latitude": 19.0180,
                 "longitude": 72.8430,

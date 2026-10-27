@@ -154,7 +154,7 @@ export default function TrustPanel() {
       {/* Calibrated Sensitivity Table */}
       <div className="bg-[#FFFFFF] border border-[#DCDDD6] rounded-sm p-4 space-y-3">
         <h3 className="text-xs font-semibold uppercase tracking-wider text-[#242722]">
-          3. Multi-Intensity Sensitivity Matrix (Hindmata Benchmark)
+          3. Multi-Intensity Sensitivity Matrix (Sangam Nagar, Wadala East Benchmark)
         </h3>
         <p className="text-xs text-[#686B65]">
           Simulated baseline vs intervention response under escalating precipitation intensities, demonstrating non-linear barrier crest overtopping and soil saturation limits.
