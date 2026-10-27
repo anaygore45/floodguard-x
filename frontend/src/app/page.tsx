@@ -19,9 +19,21 @@ import {
   ShieldAlert,
   Sliders,
   TrendingUp,
+  ShieldCheck,
+  HelpCircle,
+  Sparkles,
+  FileCheck,
+  Info,
+  Navigation
 } from "lucide-react";
 
-// Dynamically import MapView to avoid SSR window issues
+import ScenarioLab from "../components/ScenarioLab";
+import ExplanationEngine from "../components/ExplanationEngine";
+import InterventionOptimizer from "../components/InterventionOptimizer";
+import TrustPanel from "../components/TrustPanel";
+import OutcomeFeedback from "../components/OutcomeFeedback";
+
+// Dynamically import MapView and RippleImpactView to avoid SSR window issues
 const MapView = dynamic(() => import("../components/MapView"), {
   ssr: false,
   loading: () => (
@@ -31,10 +43,19 @@ const MapView = dynamic(() => import("../components/MapView"), {
   ),
 });
 
+const RippleImpactView = dynamic(() => import("../components/RippleImpactView"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-96 bg-[#FFFFFF] border border-[#DCDDD6] rounded-sm flex items-center justify-center text-xs text-[#686B65]">
+      Initializing Ripple Impact MapLibre engine...
+    </div>
+  ),
+});
+
 const API_BASE = "http://127.0.0.1:8000/api";
 
 export default function FloodGuardDashboard() {
-  const [activeTab, setActiveTab] = useState<string>("overview");
+  const [activeTab, setActiveTab] = useState<string>("scenario_lab");
 
   // State data
   const [overview, setOverview] = useState<any>({
@@ -233,151 +254,204 @@ export default function FloodGuardDashboard() {
     <div className="flex h-screen w-screen overflow-hidden bg-[#F5F5F2]">
       {/* Sidebar */}
       <aside className="w-64 bg-[#F0F0EC] border-r border-[#DCDDD6] flex flex-col justify-between shrink-0">
-        <div>
+        <div className="overflow-y-auto">
           {/* Logo / Brand Header */}
-          <div className="p-4 border-b border-[#DCDDD6]">
+          <div className="p-4 border-b border-[#DCDDD6] bg-[#FFFFFF]">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded bg-[#40584B] flex items-center justify-center text-white font-bold text-xs">
+              <div className="w-7 h-7 rounded bg-[#40584B] flex items-center justify-center text-white font-bold text-xs shadow-sm">
                 FG
               </div>
               <div>
-                <h1 className="text-sm font-semibold tracking-tight text-[#242722]">FloodGuard X</h1>
-                <p className="text-[11px] text-[#686B65]">Mumbai Urban Flood Intelligence</p>
+                <h1 className="text-sm font-bold tracking-tight text-[#242722]">FloodGuard-X</h1>
+                <p className="text-[10px] font-semibold text-[#40584B] uppercase tracking-wider">Counterfactual City</p>
               </div>
             </div>
+            <p className="text-[11px] text-[#686B65] mt-1.5 leading-snug">
+              Predict the Risk. Test the Solution. Prevent the Impact.
+            </p>
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-3 space-y-1 text-xs">
-            <button
-              onClick={() => setActiveTab("overview")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "overview"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Activity className="w-4 h-4 text-[#40584B]" />
-              Executive Overview
-            </button>
+          <div className="p-3 space-y-4 text-xs">
+            {/* Group 1: Counterfactual City (Core Upgrades) */}
+            <div className="space-y-1">
+              <div className="px-2 pb-1 text-[10px] font-bold text-[#40584B] uppercase tracking-wider">
+                Counterfactual City Core
+              </div>
 
-            <button
-              onClick={() => setActiveTab("map")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "map"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Compass className="w-4 h-4 text-[#40584B]" />
-              Geographic Intelligence
-            </button>
+              <button
+                onClick={() => setActiveTab("scenario_lab")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "scenario_lab"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <Sliders className={`w-4 h-4 ${activeTab === "scenario_lab" ? "text-white" : "text-[#40584B]"}`} />
+                Scenario Lab (Feature A)
+              </button>
 
-            <button
-              onClick={() => setActiveTab("olap")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "olap"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Database className="w-4 h-4 text-[#40584B]" />
-              Warehouse & OLAP
-            </button>
+              <button
+                onClick={() => setActiveTab("explanation")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "explanation"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <HelpCircle className={`w-4 h-4 ${activeTab === "explanation" ? "text-white" : "text-[#40584B]"}`} />
+                Explanation Engine (Feature B)
+              </button>
 
-            <button
-              onClick={() => setActiveTab("predict")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "predict"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <ShieldAlert className="w-4 h-4 text-[#40584B]" />
-              Risk Prediction ML
-            </button>
+              <button
+                onClick={() => setActiveTab("ripple")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "ripple"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <Navigation className={`w-4 h-4 ${activeTab === "ripple" ? "text-white" : "text-[#40584B]"}`} />
+                Ripple Impact GIS (Feature C)
+              </button>
 
-            <button
-              onClick={() => setActiveTab("scenario")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "scenario"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Sliders className="w-4 h-4 text-[#40584B]" />
-              Scenario Simulator
-            </button>
+              <button
+                onClick={() => setActiveTab("optimizer")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "optimizer"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <Sparkles className={`w-4 h-4 ${activeTab === "optimizer" ? "text-white" : "text-[#40584B]"}`} />
+                Intervention Optimizer (Feature D)
+              </button>
 
-            <button
-              onClick={() => setActiveTab("anomalies")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "anomalies"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <AlertTriangle className="w-4 h-4 text-[#A77936]" />
-              Anomaly Detection
-            </button>
+              <button
+                onClick={() => setActiveTab("trust")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "trust"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <Info className={`w-4 h-4 ${activeTab === "trust" ? "text-white" : "text-[#40584B]"}`} />
+                Trust & Provenance (Feature E)
+              </button>
 
-            <button
-              onClick={() => setActiveTab("cases")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "cases"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Search className="w-4 h-4 text-[#40584B]" />
-              Case Analogue Search
-            </button>
+              <button
+                onClick={() => setActiveTab("outcomes")}
+                className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
+                  activeTab === "outcomes"
+                    ? "bg-[#40584B] text-white shadow-sm font-semibold"
+                    : "text-[#242722] hover:bg-[#EAEAE5]"
+                }`}
+              >
+                <FileCheck className={`w-4 h-4 ${activeTab === "outcomes" ? "text-white" : "text-[#40584B]"}`} />
+                Learning from Outcomes (Feature F)
+              </button>
+            </div>
 
-            <button
-              onClick={() => setActiveTab("infrastructure")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "infrastructure"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <Layers className="w-4 h-4 text-[#40584B]" />
-              Critical Facilities
-            </button>
+            {/* Group 2: Foundational Warehouse & Machine Learning */}
+            <div className="space-y-1 pt-2 border-t border-[#DCDDD6]">
+              <div className="px-2 pb-1 text-[10px] font-bold text-[#686B65] uppercase tracking-wider">
+                Foundational Intelligence
+              </div>
 
-            <button
-              onClick={() => setActiveTab("budget")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "budget"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <TrendingUp className="w-4 h-4 text-[#40584B]" />
-              Inspection Optimization
-            </button>
+              <button
+                onClick={() => setActiveTab("overview")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "overview"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <Activity className="w-3.5 h-3.5 text-[#686B65]" />
+                Executive Overview
+              </button>
 
-            <button
-              onClick={() => setActiveTab("data")}
-              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded font-medium transition-colors ${
-                activeTab === "data"
-                  ? "bg-[#FFFFFF] text-[#242722] shadow-sm border border-[#DCDDD6]"
-                  : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
-              }`}
-            >
-              <FileSpreadsheet className="w-4 h-4 text-[#40584B]" />
-              Data Manifest & Audit
-            </button>
-          </nav>
+              <button
+                onClick={() => setActiveTab("map")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "map"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <Compass className="w-3.5 h-3.5 text-[#686B65]" />
+                Geographic Map
+              </button>
+
+              <button
+                onClick={() => setActiveTab("olap")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "olap"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <Database className="w-3.5 h-3.5 text-[#686B65]" />
+                Warehouse & OLAP
+              </button>
+
+              <button
+                onClick={() => setActiveTab("predict")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "predict"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <ShieldAlert className="w-3.5 h-3.5 text-[#686B65]" />
+                Risk Prediction ML
+              </button>
+
+              <button
+                onClick={() => setActiveTab("anomalies")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "anomalies"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <AlertTriangle className="w-3.5 h-3.5 text-[#A77936]" />
+                Incident Anomalies
+              </button>
+
+              <button
+                onClick={() => setActiveTab("cases")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "cases"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <Search className="w-3.5 h-3.5 text-[#686B65]" />
+                Case Analogue Search
+              </button>
+
+              <button
+                onClick={() => setActiveTab("data")}
+                className={`w-full flex items-center gap-2.5 px-3 py-1.5 rounded transition-colors ${
+                  activeTab === "data"
+                    ? "bg-[#FFFFFF] text-[#242722] shadow-sm font-semibold border border-[#DCDDD6]"
+                    : "text-[#686B65] hover:bg-[#EAEAE5] hover:text-[#242722]"
+                }`}
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5 text-[#686B65]" />
+                Data Manifest & Audit
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Footer Meta */}
-        <div className="p-3 border-t border-[#DCDDD6] text-[11px] text-[#686B65] space-y-1">
+        <div className="p-3 border-t border-[#DCDDD6] text-[11px] text-[#686B65] space-y-1 bg-[#F0F0EC]">
           <div className="flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-[#6E8975]"></span>
-            <span>FastAPI Backend Connected</span>
+            <span>FastAPI 2.0 Backend Connected</span>
           </div>
-          <div>Grain: Point Hotspot & Daily Reanalysis</div>
+          <div>7 Canonical Interventions Active</div>
           <div>License: GODL / ODbL / Open-Meteo</div>
         </div>
       </aside>
@@ -388,32 +462,79 @@ export default function FloodGuardDashboard() {
         <header className="px-6 py-3.5 bg-[#FFFFFF] border-b border-[#DCDDD6] flex items-center justify-between shrink-0">
           <div>
             <h2 className="text-sm font-semibold text-[#242722]">
+              {activeTab === "scenario_lab" && "Counterfactual Flood Scenario Lab (Feature A)"}
+              {activeTab === "explanation" && "Counterfactual Explanation Engine (Feature B)"}
+              {activeTab === "ripple" && "Ripple Impact Engine: Road Corridors & Healthcare Access (Feature C)"}
+              {activeTab === "optimizer" && "Budget-Aware Intervention Optimizer: SciPy MILP (Feature D)"}
+              {activeTab === "trust" && "Uncertainty, Provenance & Scientific Trust Panel (Feature E)"}
+              {activeTab === "outcomes" && "Learning from Outcomes: Feedback & Retraining Loop (Feature F)"}
               {activeTab === "overview" && "Executive Overview & System Telemetry"}
               {activeTab === "map" && "Geographic Intelligence & Hotspot Exploration"}
               {activeTab === "olap" && "Dimensional Warehouse & OLAP Multi-Dimensional Analysis"}
               {activeTab === "predict" && "Calibrated Risk Prediction Model (Chronological Evaluation)"}
-              {activeTab === "scenario" && "Operational Monsoon Scenario Simulator"}
               {activeTab === "anomalies" && "Unsupervised Incident Anomaly Detection"}
               {activeTab === "cases" && "Historical Case Analogue Retrieval"}
-              {activeTab === "infrastructure" && "Critical Civic Infrastructure Proximity Audit"}
-              {activeTab === "budget" && "Pre-Monsoon Inspection Budget Optimization (MILP)"}
               {activeTab === "data" && "Data Catalog Provenance & Manifest Verification"}
             </h2>
-            <p className="text-xs text-[#686B65]">Mumbai Metropolitan Region Study Area (Santacruz / Colaba / Mithi Corridor)</p>
+            <p className="text-xs text-[#686B65]">Greater Mumbai Study Area (Santacruz / Colaba / Mithi River Basin)</p>
           </div>
 
           <div className="flex items-center gap-3 text-xs">
             <span className="px-2.5 py-1 rounded bg-[#F0F0EC] border border-[#DCDDD6] text-[#242722] font-medium">
-              19 Executed Jupyter Notebooks
+              19 Executed Notebooks
             </span>
             <span className="px-2.5 py-1 rounded bg-[#EAF0EC] border border-[#74877B] text-[#40584B] font-medium">
-              Model F1: 0.945
+              Calibrated F1: 0.912
             </span>
           </div>
         </header>
 
         {/* Tab Content Panes */}
         <div className="p-6 space-y-6">
+          {/* FEATURE A: SCENARIO LAB */}
+          {activeTab === "scenario_lab" && (
+            <ScenarioLab
+              hotspots={hotspots}
+              selectedHotspot={selectedHotspot}
+              onSelectHotspot={setSelectedHotspot}
+              apiBase={API_BASE}
+            />
+          )}
+
+          {/* FEATURE B: EXPLANATION ENGINE */}
+          {activeTab === "explanation" && (
+            <ExplanationEngine
+              hotspots={hotspots}
+              selectedHotspot={selectedHotspot}
+              onSelectHotspot={setSelectedHotspot}
+              apiBase={API_BASE}
+            />
+          )}
+
+          {/* FEATURE C: RIPPLE IMPACT ENGINE */}
+          {activeTab === "ripple" && (
+            <RippleImpactView
+              hotspots={hotspots}
+              selectedHotspot={selectedHotspot}
+              onSelectHotspot={setSelectedHotspot}
+              apiBase={API_BASE}
+            />
+          )}
+
+          {/* FEATURE D: INTERVENTION OPTIMIZER */}
+          {activeTab === "optimizer" && (
+            <InterventionOptimizer apiBase={API_BASE} />
+          )}
+
+          {/* FEATURE E: UNCERTAINTY & TRUST PANEL */}
+          {activeTab === "trust" && (
+            <TrustPanel />
+          )}
+
+          {/* FEATURE F: OUTCOME FEEDBACK */}
+          {activeTab === "outcomes" && (
+            <OutcomeFeedback hotspots={hotspots} apiBase={API_BASE} />
+          )}
           {/* TAB 1: EXECUTIVE OVERVIEW */}
           {activeTab === "overview" && (
             <div className="space-y-6">
